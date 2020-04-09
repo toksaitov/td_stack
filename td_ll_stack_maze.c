@@ -28,7 +28,7 @@ static const wchar_t MAZE_EMPTY_CELL_CHARACTER =
     L' ';
 static const wchar_t MAZE_VERTICAL_WALL_CHARACTER =
     L'|';
-//    L'#';
+//  L'#';
 static const wchar_t MAZE_HORIZONTAL_WALL_CHARACTER =
     L'_';
 //  L'#';
@@ -188,6 +188,7 @@ int main(int argc, char **argv)
         TD_MAIN_EXIT_WITH_FAILURE;
     }
 
+    printf("\e[1;1H\e[2J");
     for (size_t y = 0; y < total_height; ++y) {
         maze[y] =
             (wchar_t *) malloc(sizeof(*maze) * total_width);
@@ -321,12 +322,7 @@ int main(int argc, char **argv)
                     }
                 }
 
-                printf(
-                    "\033[%zuA\033[%zuD",
-                    total_height,
-                    total_width
-                );
-
+                printf("\033[0;1H");
                 for (size_t y = 0; y < total_height; ++y) {
                     for (size_t x = 0; x < total_width; ++x) {
                         putwchar(maze[y][x]);
@@ -396,12 +392,7 @@ int main(int argc, char **argv)
                     [wall_position.x] =
                         MAZE_EMPTY_NOT_BACKTRACKED_CELL_CHARACTER;
 
-                printf(
-                    "\033[%zuA\033[%zuD",
-                    total_height,
-                    total_width
-                );
-
+                printf("\033[0;1H");
                 for (size_t y = 0; y < total_height; ++y) {
                     for (size_t x = 0; x < total_width; ++x) {
                         putwchar(maze[y][x]);
